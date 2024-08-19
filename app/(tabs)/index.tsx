@@ -5,6 +5,8 @@ import {
   Text,
   ActivityIndicator,
   ImageBackground,
+  Pressable,
+  TouchableOpacity,
 } from "react-native";
 
 import {
@@ -30,7 +32,7 @@ export default function HomeScreen() {
       <View
         style={{
           paddingHorizontal: 26,
-          marginTop: 42,
+          marginTop: 54,
           justifyContent: "space-between",
           flex: 1,
         }}
@@ -66,7 +68,74 @@ export default function HomeScreen() {
         </View>
 
         {/* bottom view */}
-        <View></View>
+        <View style={{ marginBottom: 48 }}>
+          {/* GREETING */}
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Image source={require("../../assets/images/clock-sun.png")} />
+            <Text
+              style={{
+                marginLeft: 8,
+                letterSpacing: 3,
+                fontFamily: "inter-reguler",
+                fontSize: 15,
+                color: "white",
+              }}
+            >
+              GOOD MORNING
+            </Text>
+          </View>
+          {/* time */}
+          <View style={{ marginTop: 4 }}>
+            <Text style={{ color: "white" }}>
+              <Text style={{ fontSize: 80, fontFamily: "inter-bold" }}>
+                11:37
+              </Text>
+              <Text>BST</Text>
+            </Text>
+          </View>
+          {/* location */}
+          <View style={{ marginTop: 4 }}>
+            <Text
+              style={{
+                fontFamily: "inter-bold",
+                color: "white",
+                letterSpacing: 3,
+              }}
+            >
+              IN LONDON, UK
+            </Text>
+          </View>
+          {/* button */}
+          <TouchableOpacity
+            onPress={() => {}}
+            style={{
+              flexDirection: "row",
+              height: 40,
+              width: 150,
+              backgroundColor: "white",
+              borderRadius: 30,
+              justifyContent: "space-between",
+              marginTop: 48,
+              paddingLeft: 16,
+              paddingRight: 4,
+              alignItems: "center",
+            }}
+          >
+            <Text
+              style={{
+                fontFamily: "inter-bold",
+                fontSize: 14,
+                letterSpacing: 3,
+                color: "#000",
+              }}
+            >
+              MORE
+            </Text>
+            <Image
+              source={require("../../assets/images/clock-arrow-down.png")}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
     </ImageBackground>
   );
