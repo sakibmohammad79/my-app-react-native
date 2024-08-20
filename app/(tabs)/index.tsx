@@ -13,6 +13,7 @@ import {
   Inter_700Bold,
   useFonts,
 } from "@expo-google-fonts/inter";
+import { useState } from "react";
 
 type TRowProps = {
   level: string;
@@ -50,6 +51,7 @@ const RowView = ({ level, value }: TRowProps) => {
 };
 
 export default function HomeScreen() {
+  const [showMore, setShowMore] = useState(false);
   const [fonstLoaded] = useFonts({
     "inter-reguler": Inter_400Regular,
     "inter-bold": Inter_700Bold,
@@ -71,34 +73,37 @@ export default function HomeScreen() {
         }}
       >
         {/* upper view */}
-        <View style={{ flexDirection: "row" }}>
-          <View style={{ flex: 1 }}>
-            <Text
-              style={{
-                fontFamily: "inter-reguler",
-                fontSize: 12,
-                color: "white",
-              }}
-            >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus
-              fugit delectus repudiandae modi, ipsam ad dolorum. Ipsam unde
-              quaerat, doloremque saepe dolor similique? Soluta modi, corporis
-              quae cupiditate autem eum.
-            </Text>
-            <Text
-              style={{
-                fontFamily: "inter-bold",
-                fontSize: 12,
-                color: "white",
-                marginTop: 8,
-              }}
-            >
-              Lorem ipsum
-            </Text>
-          </View>
+        {!showMore && (
+          <View style={{ flexDirection: "row" }}>
+            <View style={{ flex: 1 }}>
+              <Text
+                style={{
+                  fontFamily: "inter-reguler",
+                  fontSize: 12,
+                  color: "white",
+                  lineHeight: 18,
+                }}
+              >
+                It is in the early morning hour that the unseen is seen and that
+                the far-off beauty and glory, vanquishing all their vagueness,
+                move down upon us till they stand clear as crystal close over
+                against the soul.
+              </Text>
+              <Text
+                style={{
+                  fontFamily: "inter-bold",
+                  fontSize: 14,
+                  color: "white",
+                  marginTop: 8,
+                }}
+              >
+                — Sarah Smiley
+              </Text>
+            </View>
 
-          <Image source={require("../../assets/images/clock-refresh.png")} />
-        </View>
+            <Image source={require("../../assets/images/clock-refresh.png")} />
+          </View>
+        )}
 
         {/* bottom view */}
         <View style={{ marginBottom: 48 }}>
@@ -140,7 +145,9 @@ export default function HomeScreen() {
           </View>
           {/* button */}
           <TouchableOpacity
-            onPress={() => {}}
+            onPress={() => {
+              setShowMore(!showMore);
+            }}
             style={{
               flexDirection: "row",
               height: 40,
@@ -162,29 +169,35 @@ export default function HomeScreen() {
                 color: "#000",
               }}
             >
-              MORE
+              {showMore ? "LESS" : "MORE"}
             </Text>
             <Image
-              source={require("../../assets/images/clock-arrow-down.png")}
+              source={
+                showMore
+                  ? require("../../assets/images/clock-arrow-up.png")
+                  : require("../../assets/images/clock-arrow-down.png")
+              }
             />
           </TouchableOpacity>
         </View>
       </View>
 
       {/* expanded portion */}
-      <View
-        style={{
-          backgroundColor: "white",
-          opacity: 0.8,
-          paddingHorizontal: 26,
-          paddingVertical: 48,
-        }}
-      >
-        <RowView level={"current timezone"} value={"Europe/London"}></RowView>
-        <RowView level={"day of the year"} value={"295"}></RowView>
-        <RowView level={"day of the week"} value={"5"}></RowView>
-        <RowView level={"week number"} value={"42"}></RowView>
-      </View>
+      {showMore && (
+        <View
+          style={{
+            backgroundColor: "white",
+            opacity: 0.8,
+            paddingHorizontal: 26,
+            paddingVertical: 48,
+          }}
+        >
+          <RowView level={"current timezone"} value={"Europe/London"}></RowView>
+          <RowView level={"day of the year"} value={"295"}></RowView>
+          <RowView level={"day of the week"} value={"5"}></RowView>
+          <RowView level={"week number"} value={"42"}></RowView>
+        </View>
+      )}
     </ImageBackground>
   );
 }
