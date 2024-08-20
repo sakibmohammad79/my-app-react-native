@@ -5,16 +5,49 @@ import {
   Text,
   ActivityIndicator,
   ImageBackground,
-  Pressable,
   TouchableOpacity,
 } from "react-native";
 
 import {
   Inter_400Regular,
   Inter_700Bold,
-  Inter_900Black,
   useFonts,
 } from "@expo-google-fonts/inter";
+
+type TRowProps = {
+  level: string;
+  value: string;
+};
+
+const RowView = ({ level, value }: TRowProps) => {
+  return (
+    <View
+      style={{
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBottom: 8,
+      }}
+    >
+      <Text
+        style={{
+          fontFamily: "inter-reguler",
+          fontSize: 12,
+          color: "#303030",
+          letterSpacing: 2,
+          textTransform: "uppercase",
+        }}
+      >
+        {level}
+      </Text>
+      <Text
+        style={{ fontFamily: "inter-bold", fontSize: 20, color: "#303030" }}
+      >
+        {value}
+      </Text>
+    </View>
+  );
+};
 
 export default function HomeScreen() {
   const [fonstLoaded] = useFonts({
@@ -136,6 +169,21 @@ export default function HomeScreen() {
             />
           </TouchableOpacity>
         </View>
+      </View>
+
+      {/* expanded portion */}
+      <View
+        style={{
+          backgroundColor: "white",
+          opacity: 0.8,
+          paddingHorizontal: 26,
+          paddingVertical: 48,
+        }}
+      >
+        <RowView level={"current timezone"} value={"Europe/London"}></RowView>
+        <RowView level={"day of the year"} value={"295"}></RowView>
+        <RowView level={"day of the week"} value={"5"}></RowView>
+        <RowView level={"week number"} value={"42"}></RowView>
       </View>
     </ImageBackground>
   );
